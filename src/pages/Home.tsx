@@ -9,7 +9,7 @@ const Home = () => {
         <Link to="register">Captain Register(admin)</Link>
         <Link to="eventcreate">Create event(admin)</Link>
         <Link to="eventregister">event register</Link>
-        <Link to="eventudate">Update event(admin)</Link>
+        <Link to="eventupdate">Update event(admin)</Link>
       </div>
     </div>
   );
