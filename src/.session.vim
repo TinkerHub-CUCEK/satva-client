@@ -10,19 +10,26 @@ endif
 set shortmess=aoO
 argglobal
 %argdel
-edit ~/program/react/vite/satva/src/api/api.ts
+edit api/api.ts
 argglobal
-balt ~/program/react/vite/satva/src/api/request.ts
-let s:l = 12 - ((11 * winheight(0) + 22) / 45)
+balt pages/RegisterEvent.tsx
+let s:l = 136 - ((23 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 12
-normal! 0
+keepjumps 136
+normal! 011|
 tabnext 1
+badd +136 api/api.ts
+badd +2 api/request.ts
 badd +2 main.tsx
-badd +8 ~/program/react/vite/satva/src/api/request.ts
-badd +0 ~/program/react/vite/satva/src/api/api.ts
+badd +1 pages/Register.tsx
+badd +3 pages/Login.tsx
+badd +16 App.tsx
+badd +1 pages/CreateEvent.tsx
+badd +3 pages/UpdateEvent.tsx
+badd +4 pages/RegisterEvent.tsx
+badd +14 store.ts
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
