@@ -59,7 +59,7 @@ export async function registerUser(
   } catch (e) {
     /* handle error */
     console.error('api::registerUser error', e);
-    return null;
+    return {status: false, message: 'Error' + e};
   }
 }
 
@@ -78,7 +78,7 @@ export async function loginUser(
   } catch (e) {
     /* handle error */
     console.error('api::registerUser error', e);
-    return null;
+    return {status: false, message: 'Error' + e};
   }
 }
 
@@ -88,6 +88,7 @@ export async function createEvent(
   endTime: Date,
   minUsersPerTeam: number,
   maxUsersPerTeam: number,
+  maxTeamsPerBranch: number,
   status: string,
   adminPass: string,
 ) {
@@ -100,12 +101,13 @@ export async function createEvent(
       maxUsersPerTeam: maxUsersPerTeam,
       status: status,
       adminpass: adminPass,
+      maxTeamsPerBranch: maxTeamsPerBranch,
     });
     return response;
   } catch (e) {
     /* handle error */
     console.error('api::createEvent ', e);
-    return null;
+    return {status: false, message: 'Error' + e};
   }
 }
 
@@ -116,7 +118,7 @@ export async function listEvents() {
   } catch (e) {
     /* handle error */
     console.error('api::listEvents ', e);
-    return null;
+    return {status: false, message: 'Error' + e};
   }
 }
 
@@ -143,7 +145,7 @@ export async function updateEvent(
   } catch (e) {
     /* handle error */
     console.error('api::updateEvent ', e);
-    return null;
+    return {status: false, message: 'Error' + e};
   }
 }
 
@@ -171,6 +173,22 @@ export async function registerEvent(
   } catch (e) {
     /* handle error */
     console.error('api::registerEvent ', e);
-    return null;
+    return {status: false, message: 'Error' + e};
+  }
+}
+
+export async function listEventRegistrations(eventId: string) {
+  try {
+    const response = await postRequest(
+      apiEndpoint + 'events/listregistrations',
+      {
+        eventId: eventId,
+      },
+    );
+    return response;
+  } catch (e) {
+    /* handle error */
+    console.error('api::listEvents ', e);
+    return {status: false, message: 'Error' + e};
   }
 }

@@ -9,8 +9,9 @@ const CreateEvent = () => {
   const [eventname, setEventname] = useState('');
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
-  const [minUsersPerTeam, setMinUsersPerTeam] = useState<string>('1');
-  const [maxUsersPerTeam, setMaxUsersPerTeam] = useState<string>('1');
+  const [minUsersPerTeam, setMinUsersPerTeam] = useState('1');
+  const [maxUsersPerTeam, setMaxUsersPerTeam] = useState('1');
+  const [maxTeamsPerBranch, setMaxTeamsPerBranch] = useState('1');
   const [status, setStatus] = useState('started');
   const [adminPass, setAdminPass] = useState('');
   const [error, setError] = useState('');
@@ -23,6 +24,7 @@ const CreateEvent = () => {
       endTime,
       Number(minUsersPerTeam),
       Number(maxUsersPerTeam),
+      Number(maxTeamsPerBranch),
       status,
       adminPass,
     );
@@ -62,6 +64,18 @@ const CreateEvent = () => {
         placeholder="minUsersPerTeam"
         value={minUsersPerTeam}
         onChange={e => setMinUsersPerTeam(e.target.value)}
+      />
+
+      <input
+        placeholder="maxUsersPerTeam"
+        value={maxUsersPerTeam}
+        onChange={e => setMaxUsersPerTeam(e.target.value)}
+      />
+
+      <input
+        placeholder="maxTeamsPerBranch"
+        value={maxTeamsPerBranch}
+        onChange={e => setMaxTeamsPerBranch(e.target.value)}
       />
 
       <input
