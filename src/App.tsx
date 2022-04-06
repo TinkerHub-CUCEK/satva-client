@@ -22,7 +22,7 @@ function App() {
           <Route path={ROUTES.events} element={<Events />} />
           <Route
             path={ROUTES.registerEvent + ':id'}
-            element={<RegisterEvent eventId="624c0de80af339fcf30b4a13" />}
+            element={<RegisterEvent />}
           />
         </Routes>
       </BrowserRouter>

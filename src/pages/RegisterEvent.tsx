@@ -1,12 +1,10 @@
 import {useState} from 'react';
+import {useParams} from 'react-router-dom';
 import {registerEvent} from '../api/api';
 import {useStore} from '../store';
 
-interface RegisterEventProps {
-  eventId: string;
-}
-
-const RegisterEvent = ({eventId}: RegisterEventProps) => {
+const RegisterEvent = () => {
+  const {id} = useParams();
   const [username, setUsername] = useState('');
   const [registernumber, setRegisternumber] = useState('');
   const [phone, setPhone] = useState('');
@@ -21,6 +19,7 @@ const RegisterEvent = ({eventId}: RegisterEventProps) => {
 
   const handleSubmit = async () => {
     if (captainPass && captainMail) {
+      const eventId = id ? id : '';
       const response = await registerEvent(
         eventId,
         username,
