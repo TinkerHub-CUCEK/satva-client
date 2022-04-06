@@ -39,4 +39,19 @@
 
 button {
   font-size: calc(10px + 2vmin);
+  margin: auto;
+  margin-top: 10px;
+}
+
+
+input {
+  margin: auto;
+  margin-top: 10px;
+  max-width: 800px;
+}
+
+select {
+  margin: auto;
+  margin-top: 10px;
+  max-width: 800px;
 }
