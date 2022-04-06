@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom';
+import {ROUTES} from '../routes';
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
         <Link to="eventregister">event register</Link>
         <Link to="eventupdate">Update event(admin)</Link>
         <Link to="events">Events</Link>
+        <Link to={ROUTES.eventsViewer}>Events Viewer</Link>
       </div>
     </div>
   );

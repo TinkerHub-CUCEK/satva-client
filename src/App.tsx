@@ -8,6 +8,7 @@ import UpdateEvent from './pages/UpdateEvent';
 import RegisterEvent from './pages/RegisterEvent';
 import Events from './pages/Events';
 import {ROUTES} from './routes';
+import EventTableViwer from './pages/EventTableViwer';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path={ROUTES.createEvent} element={<CreateEvent />} />
           <Route path={ROUTES.updateEvent} element={<UpdateEvent />} />
           <Route path={ROUTES.events} element={<Events />} />
+          <Route path={ROUTES.eventsViewer} element={<EventTableViwer />} />
           <Route
             path={ROUTES.registerEvent + ':id'}
             element={<RegisterEvent />}

@@ -5,5 +5,6 @@ export const ROUTES = {
   createEvent: '/eventcreate',
   updateEvent: '/eventupdate',
   events: '/events',
+  eventsViewer: '/eventViewr',
   registerEvent: '/eventregister/',
 };

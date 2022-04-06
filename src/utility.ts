@@ -9,21 +9,33 @@ export const downloadCSV = function (data: any) {
   a.click();
 };
 
+export const removeIdsFromMongoDBItem = (data: any[]) => {
+  const newData = [...data];
+  newData.forEach(item => {
+    delete item['_id'];
+    delete item['__v'];
+  });
+  return newData;
+};
+
+export const formatMongoDBDates = (data: any) => {
+  data.forEach((item: any) => {
+    for (const i in item) {
+      if (isDateString(item[i])) {
+        item[i] = format(new Date(item[i]), 'dd-MM-yyyy');
+      }
+    }
+  });
+
+  return data;
+};
+
 export const mongoDbToCSV = function (data: any[]) {
   const csvRows = [];
-  const newData = [...data];
+  const newData = removeIdsFromMongoDBItem(data);
 
   if (data.length > 0) {
-    newData.forEach(item => {
-      delete item['_id'];
-      delete item['__v'];
-      for (const i in item) {
-        if (isDateString(item[i])) {
-          item[i] = format(new Date(item[i]), 'dd-MM-yyyy');
-        }
-      }
-    });
-
+    formatMongoDBDates(newData);
     const headers = Object.keys(newData[0]);
     csvRows.push(headers.join(','));
 
