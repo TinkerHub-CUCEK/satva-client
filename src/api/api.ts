@@ -1,6 +1,7 @@
 import {getRequest, postRequest} from './request';
 
 export interface User {
+  _id: string;
   name: string;
   email: string;
   password: string;
@@ -9,6 +10,7 @@ export interface User {
 }
 
 export interface Event {
+  _id: string;
   name: string;
   startTime: Date;
   endTime: Date;

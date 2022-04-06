@@ -55,3 +55,10 @@ select {
   margin-top: 10px;
   max-width: 800px;
 }
+
+.error {
+    color: red;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin: auto;
+}

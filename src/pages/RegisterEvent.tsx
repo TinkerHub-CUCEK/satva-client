@@ -14,6 +14,7 @@ const RegisterEvent = ({eventId}: RegisterEventProps) => {
   const [sem, setSem] = useState('');
   const [email, setEmail] = useState('');
   const [paymentDone, setPaymentDone] = useState('1');
+  const [error, setError] = useState('');
 
   const captainMail = useStore(state => state.captainMail);
   const captainPass = useStore(state => state.captainPass);
@@ -35,8 +36,10 @@ const RegisterEvent = ({eventId}: RegisterEventProps) => {
 
       if (response.status) {
         console.log('success');
+        setError('');
       } else {
         console.log('Error', response.message);
+        setError(response.message);
       }
     }
   };
@@ -44,6 +47,8 @@ const RegisterEvent = ({eventId}: RegisterEventProps) => {
   return (
     <div style={{display: 'flex', flexDirection: 'column'}}>
       <h2>Register Event</h2>
+
+      {error != '' && <div className="error">{error}</div>}
 
       <input
         placeholder="username"
