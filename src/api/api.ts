@@ -46,11 +46,16 @@ export async function registerUser(
   }
 }
 
-export async function loginUser(email: string, password: string) {
+export async function loginUser(
+  email: string,
+  password: string,
+  branch: string,
+) {
   try {
     const response = await postRequest(apiEndpoint + 'user/login', {
       email: email,
       password: password,
+      branch: branch,
     });
     return response;
   } catch (e) {
