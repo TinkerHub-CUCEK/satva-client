@@ -1,3 +1,5 @@
+import {format} from 'date-fns';
+
 export const downloadCSV = function (data: any) {
   const blob = new Blob([data], {type: 'text/csv'});
   const url = window.URL.createObjectURL(blob);
@@ -7,12 +9,35 @@ export const downloadCSV = function (data: any) {
   a.click();
 };
 
-export const objToCSV = function (data: any) {
+export const mongoDbToCSV = function (data: any[]) {
   const csvRows = [];
-  const headers = Object.keys(data);
-  csvRows.push(headers.join(','));
+  const newData = [...data];
 
-  const values = Object.values(data).join(',');
-  csvRows.push(values);
+  if (data.length > 0) {
+    newData.forEach(item => {
+      delete item['_id'];
+      delete item['__v'];
+      for (const i in item) {
+        if (isDateString(item[i])) {
+          item[i] = format(new Date(item[i]), 'dd-MM-yyyy');
+        }
+      }
+    });
+
+    const headers = Object.keys(newData[0]);
+    csvRows.push(headers.join(','));
+
+    newData.forEach(item => {
+      const values = Object.values(item).join(',');
+      csvRows.push(values);
+    });
+  }
   return csvRows.join('\n');
+};
+
+export const isDateString = (date: string) => {
+  const _regExp = new RegExp(
+    '^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(.[0-9]+)?(Z)?$',
+  );
+  return _regExp.test(date);
 };
