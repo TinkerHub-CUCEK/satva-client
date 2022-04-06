@@ -2,7 +2,6 @@ import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Event, listEvents} from '../api/api';
 import {ROUTES} from '../routes';
-import {mongoDbToCSV} from '../utility';
 
 const Events = () => {
   const [events, setEvents] = useState<Event[]>([]);
@@ -16,7 +15,9 @@ const Events = () => {
     navigate(ROUTES.registerEvent + id);
   };
 
-  console.log(mongoDbToCSV(events));
+  const handleRegistrationsClick = (id: string) => {
+    navigate(ROUTES.registrationsList + id);
+  };
 
   return (
     <div>
@@ -26,6 +27,10 @@ const Events = () => {
           <h1>{item.name}</h1>
           <button onClick={() => handleRegisterClick(item._id)}>
             RegisterEvent
+          </button>
+
+          <button onClick={() => handleRegistrationsClick(item._id)}>
+            Registrations
           </button>
         </div>
       ))}

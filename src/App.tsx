@@ -9,6 +9,7 @@ import RegisterEvent from './pages/RegisterEvent';
 import Events from './pages/Events';
 import {ROUTES} from './routes';
 import EventTableViwer from './pages/EventTableViwer';
+import EventRegTableViwer from './pages/EventRegTableViewer';
 
 function App() {
   return (
@@ -25,6 +26,11 @@ function App() {
           <Route
             path={ROUTES.registerEvent + ':id'}
             element={<RegisterEvent />}
+          />
+
+          <Route
+            path={ROUTES.registrationsList + ':id'}
+            element={<EventRegTableViwer />}
           />
         </Routes>
       </BrowserRouter>

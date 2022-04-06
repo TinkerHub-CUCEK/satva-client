@@ -7,4 +7,5 @@ export const ROUTES = {
   events: '/events',
   eventsViewer: '/eventViewr',
   registerEvent: '/eventregister/',
+  registrationsList: '/ggwp/',
 };

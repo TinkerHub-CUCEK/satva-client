@@ -24,6 +24,11 @@ export const formatMongoDBDates = (data: any) => {
       if (isDateString(item[i])) {
         item[i] = format(new Date(item[i]), 'dd-MM-yyyy');
       }
+      if (item[i] === true) {
+        item[i] = 'yes';
+      } else if (item[i] === false) {
+        item[i] = 'false';
+      }
     }
   });
 
