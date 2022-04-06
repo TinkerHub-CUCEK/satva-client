@@ -158,16 +158,13 @@ export async function registerEvent(
   branchTeamId: number,
   participants: Participant[],
 ) {
-  const eventReg: EventRegistration = {
-    eventId: eventId,
-    captainMail: captainMail,
-    branch: branch,
-    branchTeamId: branchTeamId,
-    participants: participants,
-  };
   try {
     const response = await postRequest(apiEndpoint + 'events/register', {
-      ...eventReg,
+      eventId: eventId,
+      captainMail: captainMail,
+      branch: branch,
+      branchTeamId: branchTeamId,
+      participants: participants,
       password: password,
     });
     return response;
