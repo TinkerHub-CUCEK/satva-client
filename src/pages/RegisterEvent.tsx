@@ -1,6 +1,7 @@
 import {useState} from 'react';
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import {registerEvent} from '../api/api';
+import {ROUTES} from '../routes';
 import {useStore} from '../store';
 
 const RegisterEvent = () => {
@@ -13,12 +14,11 @@ const RegisterEvent = () => {
   const [email, setEmail] = useState('');
   const [paymentDone, setPaymentDone] = useState('1');
   const [error, setError] = useState('');
-
-  const captainMail = useStore(state => state.captainMail);
-  const captainPass = useStore(state => state.captainPass);
+  const navigate = useNavigate();
+  const captain = useStore(state => state.captain);
 
   const handleSubmit = async () => {
-    if (captainPass && captainMail) {
+    if (captain) {
       const eventId = id ? id : '';
       const response = await registerEvent(
         eventId,
@@ -29,8 +29,8 @@ const RegisterEvent = () => {
         Number(sem),
         email,
         paymentDone == '1',
-        captainMail,
-        captainPass,
+        captain.captainMail,
+        captain.captainPass,
       );
 
       if (response.status) {
@@ -40,6 +40,8 @@ const RegisterEvent = () => {
         console.log('Error', response.message);
         setError(response.message);
       }
+    } else {
+      navigate(ROUTES.login);
     }
   };
 

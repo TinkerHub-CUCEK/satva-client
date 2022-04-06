@@ -1,21 +1,22 @@
 import create from 'zustand';
 import {persist} from 'zustand/middleware';
 
+interface Captain {
+  captainMail: string;
+  captainPass: string;
+  captainBranch: string;
+}
+
 interface Store {
-  captainMail: string | null;
-  setCaptainMail: (email: string) => void;
-  captainPass: string | null;
-  setCaptainPass: (pass: string) => void;
+  captain: Captain | null;
+  setCaptain: (capt: Captain) => void;
 }
 
 export const useStore = create<Store>(
   persist(
     (set, get) => ({
-      captainPass: null,
-      setCaptainPass: (pass: string) => set({captainPass: pass}),
-
-      captainMail: null,
-      setCaptainMail: (email: string) => set({captainMail: email}),
+      captain: null,
+      setCaptain: (c: Captain) => set({captain: c}),
     }),
     {name: 'main-storage'},
   ),

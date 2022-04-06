@@ -6,16 +6,19 @@ import {useStore} from '../store';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const setCaptainPass = useStore(state => state.setCaptainPass);
-  const setCaptainMail = useStore(state => state.setCaptainMail);
+  const [branch, setBranch] = useState('');
+  const setCaptain = useStore(state => state.setCaptain);
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
     const response = await loginUser(email, password);
     if (response.status) {
       console.log('success');
-      setCaptainMail(email);
-      setCaptainPass(password);
+      setCaptain({
+        captainMail: email,
+        captainPass: password,
+        captainBranch: branch,
+      });
       navigate('/home');
     } else {
       console.log('Error', response.message);
@@ -30,6 +33,12 @@ const Login = () => {
         placeholder="email"
         value={email}
         onChange={e => setEmail(e.target.value)}
+      />
+
+      <input
+        placeholder="branch"
+        value={branch}
+        onChange={e => setBranch(e.target.value)}
       />
 
       <input
