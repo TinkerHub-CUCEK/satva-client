@@ -19,6 +19,23 @@ export interface Event {
   status: string;
 }
 
+export interface Participant {
+  sem: number;
+  username: string;
+  registernumber: string;
+  phone: string;
+  email: string;
+  paymentDone: boolean;
+}
+
+export interface EventRegistration {
+  eventId: string;
+  branch: string;
+  captainMail: string;
+  branchTeamId: number;
+  participants: Participant[];
+}
+
 export const apiEndpoint = 'https://satva-server.herokuapp.com/';
 
 export async function registerUser(
@@ -132,27 +149,22 @@ export async function updateEvent(
 
 export async function registerEvent(
   eventId: string,
-  username: string,
-  registernumber: string,
-  phone: string,
   branch: string,
-  sem: number,
-  email: string,
-  paymentDone: boolean,
   captainMail: string,
   password: string,
+  branchTeamId: number,
+  participants: Participant[],
 ) {
+  const eventReg: EventRegistration = {
+    eventId: eventId,
+    captainMail: captainMail,
+    branch: branch,
+    branchTeamId: branchTeamId,
+    participants: participants,
+  };
   try {
     const response = await postRequest(apiEndpoint + 'events/register', {
-      eventId: eventId,
-      username: username,
-      registernumber: registernumber,
-      phone: phone,
-      branch: branch,
-      sem: sem,
-      email: email,
-      paymentDone: paymentDone,
-      captainMail: captainMail,
+      ...eventReg,
       password: password,
     });
     return response;

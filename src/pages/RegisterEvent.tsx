@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {registerEvent} from '../api/api';
+import ErrorField from '../components/ErrorField';
 import {ROUTES} from '../routes';
 import {useStore} from '../store';
 
@@ -49,8 +50,7 @@ const RegisterEvent = () => {
     <div style={{display: 'flex', flexDirection: 'column'}}>
       <h2>Register Event</h2>
 
-      {error != '' && <div className="error">{error}</div>}
-
+      <ErrorField errorText={error} />
       <input
         placeholder="username"
         value={username}
