@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {listEvents} from '../api/api';
 import {
+  downloadCSV,
   formatMongoDBDates,
   mongoDbToCSV,
   removeIdsFromMongoDBItem,
@@ -19,6 +20,11 @@ const EventTableViwer = () => {
   }
 
   formatMongoDBDates(events);
+
+  const handleDownload = () => {
+    downloadCSV(mongoDbToCSV(events));
+  };
+
   return (
     <div>
       <h1>EventTableViwer</h1>
@@ -41,7 +47,7 @@ const EventTableViwer = () => {
       </table>
 
       <div>
-        <button>Download Excel</button>
+        <button onClick={handleDownload}>Download Excel</button>
       </div>
     </div>
   );
