@@ -10,29 +10,34 @@ endif
 set shortmess=aoO
 argglobal
 %argdel
-edit ~/program/react/vite/satva/src/utility.ts
+edit components/AddParticipants.tsx
 argglobal
-balt pages/Events.tsx
-let s:l = 11 - ((10 * winheight(0) + 22) / 45)
+balt api/api.ts
+let s:l = 40 - ((26 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 11
-normal! 021|
+keepjumps 40
+normal! 08|
 tabnext 1
-badd +79 api/api.ts
-badd +38 pages/RegisterEvent.tsx
+badd +11 utility.ts
+badd +7 pages/Events.tsx
+badd +23 api/api.ts
+badd +24 pages/RegisterEvent.tsx
 badd +2 api/request.ts
 badd +2 main.tsx
 badd +1 pages/Register.tsx
-badd +18 pages/Login.tsx
-badd +21 App.tsx
-badd +1 pages/CreateEvent.tsx
+badd +40 pages/Login.tsx
+badd +24 App.tsx
+badd +33 pages/CreateEvent.tsx
 badd +3 pages/UpdateEvent.tsx
-badd +14 store.ts
+badd +8 store.ts
 badd +13 pages/Home.tsx
-badd +16 pages/Events.tsx
-badd +10 ~/program/react/vite/satva/src/utility.ts
+badd +61 App.css
+badd +3 routes.ts
+badd +8 components/ErrorField.tsx
+badd +5 components/RegistrationList.tsx
+badd +1 components/AddParticipants.tsx
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
@@ -44,7 +49,6 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

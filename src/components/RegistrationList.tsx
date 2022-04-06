@@ -45,13 +45,13 @@ const RegistrationList = ({
       <button onClick={handleAddTeamClick} disabled={isLoading}>
         Add Team
       </button>
-      <div>
-        {registrations.map(item => (
-          <div key={item.branchTeamId}>
-            <h1>Team {item.branchTeamId}</h1>
-          </div>
-        ))}
-      </div>
+      {registrations.map(item => (
+        <div
+          key={item.branchTeamId}
+          style={{padding: 10, backgroundColor: '#f4f4f4', margin: 10}}>
+          <h1>Team {item.branchTeamId}</h1>
+        </div>
+      ))}
     </div>
   );
 };
