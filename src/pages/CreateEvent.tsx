@@ -79,12 +79,6 @@ const CreateEvent = () => {
       />
 
       <input
-        placeholder="maxUsersPerTeam"
-        value={maxUsersPerTeam}
-        onChange={e => setMaxUsersPerTeam(e.target.value)}
-      />
-
-      <input
         placeholder="Status"
         value={status}
         onChange={e => setStatus(e.target.value)}

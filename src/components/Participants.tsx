@@ -3,30 +3,15 @@ import {Participant} from '../api/api';
 
 interface ParticipantsProps {
   participants: Participant[];
-  setParticipants: any;
   id: number;
 }
-const Participants = ({
-  participants,
-  setParticipants,
-  id,
-}: ParticipantsProps) => {
+const Participants = ({participants, id}: ParticipantsProps) => {
   const [username, setUsername] = useState('');
   const [sem, setSem] = useState('');
   const [registernumber, setRegisternumber] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [paymentDone, setPaymentDone] = useState('yes');
-
-  const handleUpdateClik = () => {
-    participants[id].username = username;
-    participants[id].sem = Number(sem);
-    participants[id].registernumber = registernumber;
-    participants[id].phone = phone;
-    participants[id].email = email;
-    participants[id].paymentDone = paymentDone == 'yes' ? true : false;
-    setParticipants([...participants]);
-  };
 
   useEffect(() => {
     setUsername(participants[id].username);
@@ -36,6 +21,15 @@ const Participants = ({
     setEmail(participants[id].email);
     setPaymentDone(participants[id].paymentDone ? 'yes' : 'no');
   }, [participants, id]);
+
+  useEffect(() => {
+    participants[id].username = username;
+    participants[id].sem = Number(sem);
+    participants[id].registernumber = registernumber;
+    participants[id].phone = phone;
+    participants[id].email = email;
+    participants[id].paymentDone = paymentDone == 'yes' ? true : false;
+  }, [username, sem, registernumber, phone, email, paymentDone]);
 
   return (
     <div>
@@ -75,8 +69,6 @@ const Participants = ({
         <option value="yes">YES</option>
         <option value="no">No</option>
       </select>
-
-      <button onClick={handleUpdateClik}>Update</button>
     </div>
   );
 };

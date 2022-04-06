@@ -29,6 +29,7 @@ export interface Participant {
 }
 
 export interface EventRegistration {
+  _id: string;
   eventId: string;
   branch: string;
   captainMail: string;
@@ -186,7 +187,7 @@ export async function updateRegistration(
 ) {
   try {
     const response = await postRequest(
-      apiEndpoint + 'events/updateregistraion',
+      apiEndpoint + 'events/updateregistration',
       {
         password: password,
         captainMail: captainMail,
