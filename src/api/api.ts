@@ -177,6 +177,32 @@ export async function registerEvent(
   }
 }
 
+export async function updateRegistration(
+  eventId: string,
+  regId: string,
+  captainMail: string,
+  password: string,
+  participants: Participant[],
+) {
+  try {
+    const response = await postRequest(
+      apiEndpoint + 'events/updateregistraion',
+      {
+        password: password,
+        captainMail: captainMail,
+        regId: regId,
+        participants: participants,
+        eventId: eventId,
+      },
+    );
+    return response;
+  } catch (e) {
+    /* handle error */
+    console.error('api::registerEvent ', e);
+    return {status: false, message: 'Error' + e};
+  }
+}
+
 export async function listEventRegistrations(eventId: string) {
   try {
     const response = await postRequest(

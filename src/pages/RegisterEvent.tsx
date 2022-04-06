@@ -1,11 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import {
-  EventRegistration,
-  listEventRegistrations,
-  registerEvent,
-} from '../api/api';
-import ErrorField from '../components/ErrorField';
+import {EventRegistration, listEventRegistrations} from '../api/api';
 import RegistrationList from '../components/RegistrationList';
 import {ROUTES} from '../routes';
 import {useStore} from '../store';
@@ -17,16 +12,19 @@ const RegisterEvent = () => {
   const captain = useStore(state => state.captain);
   const [registrations, setRegistrations] = useState<EventRegistration[]>([]);
 
+  const loadEventRegistraions = async () => {
+    const response = await listEventRegistrations(eventId);
+    if (response.status && captain) {
+      setRegistrations(
+        response.data.filter(
+          (item: EventRegistration) => (item.branch = captain.captainBranch),
+        ),
+      );
+    }
+  };
+
   useEffect(() => {
-    listEventRegistrations(eventId).then(response => {
-      if (response.status && captain) {
-        setRegistrations(
-          response.data.filter(
-            (item: EventRegistration) => (item.branch = captain.captainBranch),
-          ),
-        );
-      }
-    });
+    loadEventRegistraions();
   }, [id]);
 
   // const handleSubmit = async (branchTeamId: number) => {
@@ -55,7 +53,11 @@ const RegisterEvent = () => {
   return (
     <div style={{display: 'flex', flexDirection: 'column'}}>
       <h2>Register Event</h2>
-      <RegistrationList registrations={registrations} />
+      <RegistrationList
+        registrations={registrations}
+        loadEventRegistraions={loadEventRegistraions}
+        eventId={eventId}
+      />
     </div>
   );
 };
