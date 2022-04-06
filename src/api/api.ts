@@ -87,7 +87,7 @@ export async function createEvent(
 
 export async function listEvents() {
   try {
-    const response = await getRequest(apiEndpoint + 'user/listevents');
+    const response = await getRequest(apiEndpoint + 'events/listevents');
     return response;
   } catch (e) {
     /* handle error */

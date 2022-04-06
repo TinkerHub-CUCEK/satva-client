@@ -10,6 +10,7 @@ const Home = () => {
         <Link to="eventcreate">Create event(admin)</Link>
         <Link to="eventregister">event register</Link>
         <Link to="eventupdate">Update event(admin)</Link>
+        <Link to="events">Events</Link>
       </div>
     </div>
   );
