@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {registerUser} from '../api/api';
+import {api_registerUser} from '../api/api';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -7,16 +7,14 @@ const Register = () => {
   const [branch, setBranch] = useState('');
   const [password, setPassword] = useState('');
   const [sem, setSem] = useState<string | number>('6');
-  const [adminPass, setAdminPass] = useState('');
 
   const handleSubmit = async () => {
-    const response = await registerUser(
+    const response = await api_registerUser(
       name,
       email,
       password,
       branch,
       Number(sem),
-      adminPass,
     );
     if (response.status) {
       console.log('success');
@@ -56,12 +54,6 @@ const Register = () => {
         placeholder="sem"
         value={sem}
         onChange={e => setSem(e.target.value)}
-      />
-
-      <input
-        placeholder="adminPass"
-        value={adminPass}
-        onChange={e => setAdminPass(e.target.value)}
       />
 
       <button onClick={handleSubmit}>Submit</button>

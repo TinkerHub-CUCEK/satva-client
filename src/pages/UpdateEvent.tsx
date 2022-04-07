@@ -1,6 +1,6 @@
 import {format} from 'date-fns';
 import {useState} from 'react';
-import {updateEvent} from '../api/api';
+import {api_updateEvent} from '../api/api';
 
 const UpdateEvent = () => {
   const [eventname, setEventname] = useState('');
@@ -9,17 +9,15 @@ const UpdateEvent = () => {
   const [minUsersPerTeam, setMinUsersPerTeam] = useState<string>('1');
   const [maxUsersPerTeam, setMaxUsersPerTeam] = useState<string>('1');
   const [status, setStatus] = useState('started');
-  const [adminPass, setAdminPass] = useState('');
 
   const handleSubmit = async () => {
-    const response = await updateEvent(
+    const response = await api_updateEvent(
       eventname,
       startTime,
       endTime,
       Number(minUsersPerTeam),
       Number(maxUsersPerTeam),
       status,
-      adminPass,
     );
     if (response.status) {
       console.log('success');
@@ -67,12 +65,6 @@ const UpdateEvent = () => {
         placeholder="Status"
         value={status}
         onChange={e => setStatus(e.target.value)}
-      />
-
-      <input
-        placeholder="adminPass"
-        value={adminPass}
-        onChange={e => setAdminPass(e.target.value)}
       />
 
       <button onClick={handleSubmit}>Submit</button>

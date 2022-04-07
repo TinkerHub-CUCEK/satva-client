@@ -10,6 +10,7 @@ import Events from './pages/Events';
 import {ROUTES} from './routes';
 import EventTableViwer from './pages/EventTableViwer';
 import EventRegTableViwer from './pages/EventRegTableViewer';
+import AdminLogin from './pages/AdminLogin';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path={ROUTES.home} element={<Home />} />
           <Route path={ROUTES.register} element={<Register />} />
           <Route path={ROUTES.login} element={<Login />} />
+          <Route path={ROUTES.adminLogin} element={<AdminLogin />} />
           <Route path={ROUTES.createEvent} element={<CreateEvent />} />
           <Route path={ROUTES.updateEvent} element={<UpdateEvent />} />
           <Route path={ROUTES.events} element={<Events />} />

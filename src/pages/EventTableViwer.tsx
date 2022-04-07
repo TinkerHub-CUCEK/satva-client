@@ -1,18 +1,19 @@
 import {useEffect, useState} from 'react';
-import {listEvents} from '../api/api';
 import {
   downloadCSV,
   formatMongoDBDates,
   mongoDbToCSV,
   removeIdsFromMongoDBItem,
 } from '../utility';
-import {Event} from '../api/api';
+import {api_listEvents, Event} from '../api/api';
 
 const EventTableViwer = () => {
   const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
-    listEvents().then(list => setEvents(removeIdsFromMongoDBItem(list.data)));
+    api_listEvents().then(list =>
+      setEvents(removeIdsFromMongoDBItem(list.data)),
+    );
   }, []);
 
   if (events.length == 0) {

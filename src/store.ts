@@ -10,6 +10,8 @@ interface Captain {
 interface Store {
   captain: Captain | null;
   setCaptain: (capt: Captain) => void;
+  adminPass: string | null;
+  setAdminPass: (pass: string) => void;
 }
 
 export const useStore = create<Store>(
@@ -17,6 +19,8 @@ export const useStore = create<Store>(
     (set, get) => ({
       captain: null,
       setCaptain: (c: Captain) => set({captain: c}),
+      adminPass: null,
+      setAdminPass: (pass: string) => set({adminPass: pass}),
     }),
     {name: 'main-storage'},
   ),

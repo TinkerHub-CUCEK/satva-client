@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {EventRegistration, listEventRegistrations} from '../api/api';
+import {api_listEventRegistrations, EventRegistration} from '../api/api';
 import {
   downloadCSV,
   formatMongoDBDates,
@@ -7,6 +7,7 @@ import {
   removeIdsFromMongoDBItem,
 } from '../utility';
 import {useParams} from 'react-router-dom';
+import {useStore} from '../store';
 
 const formatEventRegData = (data: EventRegistration[]) => {
   let array: any = [];
@@ -28,15 +29,47 @@ const EventRegTableViwer = () => {
   const {id} = useParams();
   const eventId = id ? id : '';
   const [registrations, setRegistrations] = useState<EventRegistration[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const captain = useStore(state => state.captain);
+  const admin = useStore(state => state.adminPass);
 
   useEffect(() => {
-    listEventRegistrations(eventId).then(list =>
-      setRegistrations(removeIdsFromMongoDBItem(formatEventRegData(list.data))),
+    if (admin || captain) {
+      setIsLoading(true);
+      api_listEventRegistrations(eventId)
+        .then(list => {
+          if (admin) {
+            setRegistrations(
+              removeIdsFromMongoDBItem(formatEventRegData(list.data)),
+            );
+            console.log('admin');
+          } else if (captain) {
+            const branchOnlyData = list.data.filter(
+              (item: EventRegistration) => item.branch == captain.captainBranch,
+            );
+            setRegistrations(
+              removeIdsFromMongoDBItem(formatEventRegData(branchOnlyData)),
+            );
+          }
+        })
+        .finally(() => setIsLoading(false));
+    }
+  }, [admin, captain]);
+
+  if (isLoading) {
+    return (
+      <div>
+        <h1>Loading...</h1>
+      </div>
     );
-  }, []);
+  }
 
   if (registrations.length == 0) {
-    return null;
+    return (
+      <div>
+        <h1>OOPS! No registrations</h1>
+      </div>
+    );
   }
 
   formatMongoDBDates(registrations);

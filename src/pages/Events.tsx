@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {Event, listEvents} from '../api/api';
+import {api_listEvents, Event} from '../api/api';
 import {ROUTES} from '../routes';
 
 const Events = () => {
@@ -8,7 +8,7 @@ const Events = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    listEvents().then(list => setEvents(list.data));
+    api_listEvents().then(list => setEvents(list.data));
   }, []);
 
   const handleRegisterClick = (id: string) => {

@@ -10,19 +10,18 @@ endif
 set shortmess=aoO
 argglobal
 %argdel
-edit components/AddParticipants.tsx
+edit components/RegistrationList.tsx
 argglobal
-balt api/api.ts
-let s:l = 40 - ((26 * winheight(0) + 22) / 45)
+let s:l = 5 - ((4 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 40
-normal! 08|
+keepjumps 5
+normal! 0
 tabnext 1
+badd +23 api/api.ts
 badd +11 utility.ts
 badd +7 pages/Events.tsx
-badd +23 api/api.ts
 badd +24 pages/RegisterEvent.tsx
 badd +2 api/request.ts
 badd +2 main.tsx
@@ -37,7 +36,6 @@ badd +61 App.css
 badd +3 routes.ts
 badd +8 components/ErrorField.tsx
 badd +5 components/RegistrationList.tsx
-badd +1 components/AddParticipants.tsx
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif

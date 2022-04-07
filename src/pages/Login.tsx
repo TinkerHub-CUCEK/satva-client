@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {loginUser} from '../api/api';
+import {api_loginUser} from '../api/api';
 import ErrorField from '../components/ErrorField';
 import {ROUTES} from '../routes';
 import {useStore} from '../store';
@@ -14,7 +14,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    const response = await loginUser(email, password, branch);
+    const response = await api_loginUser(email, password, branch);
     if (response.status) {
       console.log('success');
       setCaptain({

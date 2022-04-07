@@ -1,9 +1,9 @@
 import {useState} from 'react';
 import {
+  api_registerEvent,
+  api_updateRegistration,
   EventRegistration,
   Participant,
-  registerEvent,
-  updateRegistration,
 } from '../api/api';
 import {useStore} from '../store';
 import ErrorField from './ErrorField';
@@ -26,7 +26,7 @@ const RegistrationList = ({
     if (captain) {
       setIsLoading(true);
       const newId = registrations.length + 1;
-      const result = await registerEvent(
+      const result = await api_registerEvent(
         eventId,
         captain.captainBranch,
         captain.captainMail,
@@ -59,7 +59,7 @@ const RegistrationList = ({
         paymentDone: false,
       };
 
-      const res = await updateRegistration(
+      const res = await api_updateRegistration(
         eventId,
         regId,
         captain.captainMail,
@@ -79,7 +79,7 @@ const RegistrationList = ({
     participants: Participant[],
   ) => {
     if (captain) {
-      const res = await updateRegistration(
+      const res = await api_updateRegistration(
         eventId,
         regId,
         captain.captainMail,

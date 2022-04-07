@@ -1,3 +1,4 @@
+import {useStore} from '../store';
 import {getRequest, postRequest} from './request';
 
 export interface User {
@@ -39,13 +40,12 @@ export interface EventRegistration {
 
 export const apiEndpoint = 'https://satva-server.herokuapp.com/';
 
-export async function registerUser(
+export async function api_registerUser(
   username: string,
   email: string,
   password: string,
   branch: string,
   sem: number,
-  adminPass: string,
 ) {
   try {
     const response = await postRequest(apiEndpoint + 'user/register', {
@@ -54,7 +54,7 @@ export async function registerUser(
       password: password,
       branch: branch,
       sem: sem,
-      adminpass: adminPass,
+      adminpass: useStore.getState().adminPass,
     });
     return response;
   } catch (e) {
@@ -64,7 +64,7 @@ export async function registerUser(
   }
 }
 
-export async function loginUser(
+export async function api_loginUser(
   email: string,
   password: string,
   branch: string,
@@ -83,7 +83,20 @@ export async function loginUser(
   }
 }
 
-export async function createEvent(
+export async function api_loginAdmin(adminPass: string) {
+  try {
+    const response = await postRequest(apiEndpoint + 'user/loginadmin', {
+      adminpass: adminPass,
+    });
+    return response;
+  } catch (e) {
+    /* handle error */
+    console.error('api::registerUser error', e);
+    return {status: false, message: 'Error' + e};
+  }
+}
+
+export async function api_createEvent(
   name: string,
   startTime: Date,
   endTime: Date,
@@ -91,7 +104,6 @@ export async function createEvent(
   maxUsersPerTeam: number,
   maxTeamsPerBranch: number,
   status: string,
-  adminPass: string,
 ) {
   try {
     const response = await postRequest(apiEndpoint + 'events/create', {
@@ -101,7 +113,7 @@ export async function createEvent(
       minUsersPerTeam: minUsersPerTeam,
       maxUsersPerTeam: maxUsersPerTeam,
       status: status,
-      adminpass: adminPass,
+      adminpass: useStore.getState().adminPass,
       maxTeamsPerBranch: maxTeamsPerBranch,
     });
     return response;
@@ -112,7 +124,7 @@ export async function createEvent(
   }
 }
 
-export async function listEvents() {
+export async function api_listEvents() {
   try {
     const response = await getRequest(apiEndpoint + 'events/listevents');
     return response;
@@ -123,14 +135,13 @@ export async function listEvents() {
   }
 }
 
-export async function updateEvent(
+export async function api_updateEvent(
   name: string,
   startTime: Date,
   endTime: Date,
   minUsersPerTeam: number,
   maxUsersPerTeam: number,
   status: string,
-  adminPass: string,
 ) {
   try {
     const response = await postRequest(apiEndpoint + 'events/update', {
@@ -140,7 +151,7 @@ export async function updateEvent(
       minUsersPerTeam: minUsersPerTeam,
       maxUsersPerTeam: maxUsersPerTeam,
       status: status,
-      adminpass: adminPass,
+      adminpass: useStore.getState().adminPass,
     });
     return response;
   } catch (e) {
@@ -150,7 +161,7 @@ export async function updateEvent(
   }
 }
 
-export async function registerEvent(
+export async function api_registerEvent(
   eventId: string,
   branch: string,
   captainMail: string,
@@ -175,7 +186,7 @@ export async function registerEvent(
   }
 }
 
-export async function updateRegistration(
+export async function api_updateRegistration(
   eventId: string,
   regId: string,
   captainMail: string,
@@ -201,7 +212,7 @@ export async function updateRegistration(
   }
 }
 
-export async function listEventRegistrations(eventId: string) {
+export async function api_listEventRegistrations(eventId: string) {
   try {
     const response = await postRequest(
       apiEndpoint + 'events/listregistrations',

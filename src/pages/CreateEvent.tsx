@@ -1,7 +1,7 @@
 import {format} from 'date-fns';
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {createEvent} from '../api/api';
+import {api_createEvent} from '../api/api';
 import ErrorField from '../components/ErrorField';
 import {ROUTES} from '../routes';
 
@@ -13,12 +13,11 @@ const CreateEvent = () => {
   const [maxUsersPerTeam, setMaxUsersPerTeam] = useState('1');
   const [maxTeamsPerBranch, setMaxTeamsPerBranch] = useState('1');
   const [status, setStatus] = useState('started');
-  const [adminPass, setAdminPass] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    const response = await createEvent(
+    const response = await api_createEvent(
       eventname,
       startTime,
       endTime,
@@ -26,7 +25,6 @@ const CreateEvent = () => {
       Number(maxUsersPerTeam),
       Number(maxTeamsPerBranch),
       status,
-      adminPass,
     );
     if (response.status) {
       console.log('success');
@@ -82,12 +80,6 @@ const CreateEvent = () => {
         placeholder="Status"
         value={status}
         onChange={e => setStatus(e.target.value)}
-      />
-
-      <input
-        placeholder="adminPass"
-        value={adminPass}
-        onChange={e => setAdminPass(e.target.value)}
       />
 
       <button onClick={handleSubmit}>Submit</button>
