@@ -24,39 +24,52 @@ const Register = () => {
   };
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column'}}>
-      <h2>Register Captain</h2>
-      <input
-        placeholder="username"
-        value={name}
-        onChange={e => setName(e.target.value)}
-      />
+    <div className="flex justify-center items-center h-screen">
+      <div className="flex flex-col px-12 space-y-6 py-16 border-black  rounded justify-center items-center border ">
+        <h2 className="text-2xl text-gray-700 font-light uppercase pb-4">
+          Register Captain
+        </h2>
+        <input
+          className="px-6 py-3 border-2 border-black rounded"
+          placeholder="username"
+          value={name}
+          onChange={e => setName(e.target.value)}
+        />
 
-      <input
-        placeholder="email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-      />
+        <input
+          className="px-6 py-3 border-2 border-black rounded"
+          placeholder="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
 
-      <input
-        placeholder="branch"
-        value={branch}
-        onChange={e => setBranch(e.target.value)}
-      />
+        <input
+          className="px-6 py-3 border-2 border-black rounded"
+          placeholder="branch"
+          value={branch}
+          onChange={e => setBranch(e.target.value)}
+        />
 
-      <input
-        placeholder="password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
+        <input
+          className="px-6 py-3 border-2 border-black rounded"
+          placeholder="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
 
-      <input
-        placeholder="sem"
-        value={sem}
-        onChange={e => setSem(e.target.value)}
-      />
+        <input
+          className="px-6 py-3 border-2 border-black rounded"
+          placeholder="sem"
+          value={sem}
+          onChange={e => setSem(e.target.value)}
+        />
 
-      <button onClick={handleSubmit}>Submit</button>
+        <button
+          className="bg-gray-800 uppercase font-light rounded text-white  px-8 py-3"
+          onClick={handleSubmit}>
+          Submit
+        </button>
+      </div>
     </div>
   );
 };

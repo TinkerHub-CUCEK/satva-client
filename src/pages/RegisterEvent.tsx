@@ -26,13 +26,17 @@ const RegisterEvent = () => {
   }, [id]);
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column'}}>
-      <h2>Register Event</h2>
-      <RegistrationList
-        registrations={registrations}
-        loadEventRegistraions={loadEventRegistraions}
-        eventId={eventId}
-      />
+    <div className="">
+      <h2 className="text-2xl text-center text-gray-700 font-light uppercase pb-4">
+        Register Event
+      </h2>
+      <div className="px-12">
+        <RegistrationList
+          registrations={registrations}
+          loadEventRegistraions={loadEventRegistraions}
+          eventId={eventId}
+        />
+      </div>
     </div>
   );
 };

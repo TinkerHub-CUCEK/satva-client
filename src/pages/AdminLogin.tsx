@@ -22,15 +22,24 @@ const AdminLogin = () => {
   };
 
   return (
-    <div>
-      <h1>AdminLogin</h1>
-      <ErrorField errorText={error} />
-      <input
-        type="password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
-      <button onClick={handleSubmitClick}>Submit</button>
+    <div className="flex justify-center items-center h-screen">
+      <div className="flex flex-col px-12 space-y-6 py-16 border-black  rounded justify-center items-center border ">
+        <h1 className="text-2xl text-gray-700 font-light uppercase pb-4">
+          AdminLogin
+        </h1>
+        <ErrorField errorText={error} />
+        <input
+          className="px-6 py-3 border-2 border-black rounded"
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+        <button
+          className="bg-gray-800 uppercase font-light rounded text-white  px-8 py-3"
+          onClick={handleSubmitClick}>
+          Submit
+        </button>
+      </div>
     </div>
   );
 };

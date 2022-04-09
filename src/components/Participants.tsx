@@ -32,38 +32,44 @@ const Participants = ({participants, id}: ParticipantsProps) => {
   }, [username, sem, registernumber, phone, email, paymentDone]);
 
   return (
-    <div>
+    <div className="flex gap-2 ">
       <input
+        className="border px-2 py-2  rounded"
         placeholder="Name"
         value={username}
         onChange={e => setUsername(e.target.value)}
       />
 
       <input
-        placeholder="registernumber"
+        className="border px-2 py-2  rounded"
+        placeholder="Register number"
         value={registernumber}
         onChange={e => setRegisternumber(e.target.value)}
       />
 
       <input
-        placeholder="sem"
+        className="border px-2 py-2  rounded"
+        placeholder="Semester"
         value={sem}
         onChange={e => setSem(e.target.value)}
       />
 
       <input
-        placeholder="phone"
+        className="border px-2 py-2  rounded"
+        placeholder="Phone"
         value={phone}
         onChange={e => setPhone(e.target.value)}
       />
 
       <input
-        placeholder="email"
+        className="border px-2 py-2  rounded"
+        placeholder="Email"
         value={email}
         onChange={e => setEmail(e.target.value)}
       />
 
       <select
+        className="border px-2 py-2  rounded"
         value={paymentDone}
         onChange={e => setPaymentDone(e.target.value)}>
         <option value="yes">YES</option>
