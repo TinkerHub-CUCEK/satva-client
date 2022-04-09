@@ -96,28 +96,39 @@ const RegistrationList = ({
   return (
     <div>
       <ErrorField errorText={error} />
-      <button onClick={handleAddTeamClick} disabled={isLoading}>
+      <button
+        className="dark-btn transition w-full"
+        onClick={handleAddTeamClick}
+        disabled={isLoading}>
         Add Team
       </button>
-      {registrations.map(item => (
-        <div
-          key={item.branchTeamId}
-          style={{padding: 10, backgroundColor: '#f4f4f4', margin: 10}}>
-          <h1>Team {item.branchTeamId}</h1>
-          <button
-            onClick={() => handleAddPartClick(item._id, item.participants)}>
-            Add Participant
-          </button>
-          {item.participants.map((p, id) => (
-            <Participants key={id} id={id} participants={item.participants} />
-          ))}
+      <div className="space-y-2 pt-12">
+        {registrations.map(item => (
+          <div className="border rounded px-12" key={item.branchTeamId}>
+            <h1 className="text-xl text-center font-gray-600 font-light pt-4">
+              Team {item.branchTeamId}
+            </h1>
+            <div className="py-6"><button
+              className="px-2 py-1 border bg-gray-700 text-white hover:bg-white border-gray-700  hover:text-black transition rounded"
+              onClick={() => handleAddPartClick(item._id, item.participants)}>
+              Add Participant
+            </button></div>
+            {item.participants.map((p, id) => (
+              <Participants key={id} id={id} participants={item.participants} />
+            ))}
 
-          <button
-            onClick={() => handleTeamUpdateClick(item._id, item.participants)}>
-            Update Team
-          </button>
-        </div>
-      ))}
+            <div className="flex justify-center py-6">
+              <button
+                className="px-2 py-1 bg-white text-black border rounded hover:text-white hover:bg-gray-700 border-gray-700  transition"
+                onClick={() =>
+                  handleTeamUpdateClick(item._id, item.participants)
+                }>
+                Update Team
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
